@@ -14,8 +14,10 @@ public class ShortPartEndpointServ {
 
     @WebMethod
     public RouteResponse findShortestPath(RouteRequest request) {
-        List<NodesPlanets> path = shortestPathService.findShortestPath(request.getStart(), request.getEnd());
+    	// Java 8, Stream API is used to process collections of objects. A stream in Java is a sequence of objects that supports various methods which can be pipelined to produce the desired result.
+        List<String>  path= shortestPathService.findShortestPath(request.getStart(), request.getEnd()).stream().map(notePlanet -> notePlanet.getName()).toList();
         System.out.println(path);
+        
         return new RouteResponse(path);
     }
 }
